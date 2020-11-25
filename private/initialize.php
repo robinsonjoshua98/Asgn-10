@@ -32,6 +32,7 @@
   include('classes/bird.class.php');
   include('classes/admin.class.php');
   include('classes/parsecsv.class.php');
+  include('classes/session.class.php');
   // Autoload class definitions
 
   function my_autoload($class) {
