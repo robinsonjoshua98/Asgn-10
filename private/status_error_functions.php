@@ -1,5 +1,13 @@
 <?php
 
+function require_login(){
+  global $session;
+  if(!$session->is_logged_in()){
+    redirect_to(url_for('/bird-staff/login.php'));
+  }else {
+  }
+}
+
 function display_errors($errors=array()) {
 //  function display_errors($this->errors()) {}
   $output = '';
