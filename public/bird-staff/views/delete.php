@@ -17,7 +17,8 @@ if(is_post_request()) {
 
   $result = $bird->delete();
 
-  $_SESSION['message'] = 'The bird was deleted successfully.';
+  $session->message('The admin was deleted successfully.');
+
   redirect_to(url_for('/bird-staff/views/index.php'));
 
 } else {

@@ -22,7 +22,7 @@ if(is_post_request()) {
   $result = $bird->update();
 
   if($result == true) {
-    $_SESSION['message'] = 'The bird was updated successfully.';
+    $session->message('The admin was updated successfully.');
     redirect_to(url_for('/bird-staff/views/show.php?id=' . $bird->id));
   } else {
     echo "some error message coming soon!";

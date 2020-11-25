@@ -2,7 +2,6 @@
 
 require_once('../../../private/initialize.php');
  require_login();
-
 if(!isset($_GET['id'])) {
   redirect_to(url_for('/bird-staff/admins/index.php'));
 }
@@ -16,7 +15,8 @@ if(is_post_request()) {
 
   // Delete admin
   $result = $admin->delete();
-  $_SESSION['message'] = 'The admin was deleted successfully.';
+  $session->message('The admin was deleted successfully.');
+
   redirect_to(url_for('/bird-staff/admins/index.php'));
 
 } else {
