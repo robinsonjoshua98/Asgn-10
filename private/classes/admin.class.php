@@ -32,6 +32,10 @@ class Admin extends DatabaseObject {
    $this->hashed_password = password_hash($this->password, PASSWORD_BCRYPT);
  }
 
+ public function verify_password($password) {
+   return password_verify($password, $this->hashed_password);
+ }
+
  // TODO: Refactor so it can easily inherit from the parent class
  protected function create() {
    $this->set_hashed_password();
