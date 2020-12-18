@@ -2,8 +2,9 @@
 
 class Admin extends DatabaseObject {
 
-  static protected $table_name = "admins";
-  static protected $db_columns = ['id', 'first_name', 'last_name', 'email', 'username', 'hashed_password'];
+  static protected $table_name = "users";
+  static protected $db_columns = ['id', 'first_name', 'last_name', 'email',
+  'username', 'hashed_password', 'user_level'];
 
   public $id;
   public $first_name;
@@ -14,6 +15,7 @@ class Admin extends DatabaseObject {
   public $password;
   public $confirm_password;
   protected $password_required = true;
+  public $user_level;
 
   public function __construct($args=[]) {
     $this->first_name = $args['first_name'] ?? '';

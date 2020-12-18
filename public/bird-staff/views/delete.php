@@ -1,6 +1,7 @@
 <?php
 
 require_once('../../../private/initialize.php');
+
 require_login();
 
 if(!isset($_GET['id'])) {
@@ -17,8 +18,7 @@ if(is_post_request()) {
 
   $result = $bird->delete();
 
-  $session->message('The admin was deleted successfully.');
-
+  $_SESSION['message'] = 'The bird was deleted successfully.';
   redirect_to(url_for('/bird-staff/views/index.php'));
 
 } else {

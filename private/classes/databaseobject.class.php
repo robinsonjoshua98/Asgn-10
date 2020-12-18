@@ -114,7 +114,7 @@ class DatabaseObject {
     public function delete() {
         $sql = "DELETE FROM " . static::$table_name . "  ";
         $sql .= "WHERE id = :id ";
-        $sql = "LIMIT 1";
+        $sql .= "LIMIT 1";
         $stmt = self::$database->prepare($sql);
         $stmt->bindValue(':id', $this->id );
         $result = $stmt->execute();
@@ -123,17 +123,51 @@ class DatabaseObject {
 
     }
 
+    // public function update() {
+    //     $this->validate();
+    //     if(!empty($this->errors)) {
+    //         return false;
+    //     }
+    //     // $attributes = $this->sanitized_attributes();
+    //     // $attribute_pairs = [];
+    //     // foreach($attributes as $key => $value) {
+    //     //     $attribute_pairs = "{$key}='{$value}'";
+    //     // }
+
+    //     $sql = 'UPDATE ' . static::$table_name . ' SET ';
+    //     $sql .= 'common_name = :common_name, ';
+    //     $sql .= 'habitat = :habitat, ';
+    //     $sql .= 'food = :food, ';
+    //     $sql .= 'conservation_id = :conservation_id, ';
+    //     $sql .= 'backyard_tips = :backyard_tips ';
+    //     $sql .= "WHERE id = '" . $this->id . "'";
+    //     $sql .= " LIMIT 1";
+    //     $stmt = self::$database->prepare($sql);
+
+    //     $stmt->bindValue(':common_name', $this->common_name );
+    //     $stmt->bindValue(':habitat', $this->habitat );
+    //     $stmt->bindValue(':food', $this->food );
+    //     $stmt->bindValue(':conservation_id', $this->conservation_id );
+    //     $stmt->bindValue('backyard_tips', $this->backyard_tips );
+        
+        
+    //     $result = $stmt->execute();
+    //     var_dump($result);
+    //     exit();
+    //     return $result;
+
+        
+    // }     
     public function update() {
         $this->validate();
         if(!empty($this->errors)) {
-            return false;
+        return false;
         }
         // $attributes = $this->sanitized_attributes();
         // $attribute_pairs = [];
         // foreach($attributes as $key => $value) {
-        //     $attribute_pairs = "{$key}='{$value}'";
+        // $attribute_pairs = "{$key}='{$value}'";
         // }
-
         $sql = 'UPDATE ' . static::$table_name . ' SET ';
         $sql .= 'common_name = :common_name, ';
         $sql .= 'habitat = :habitat, ';
@@ -143,34 +177,15 @@ class DatabaseObject {
         $sql .= "WHERE id = '" . $this->id . "'";
         $sql .= " LIMIT 1";
         $stmt = self::$database->prepare($sql);
-
         $stmt->bindValue(':common_name', $this->common_name );
         $stmt->bindValue(':habitat', $this->habitat );
         $stmt->bindValue(':food', $this->food );
         $stmt->bindValue(':conservation_id', $this->conservation_id );
         $stmt->bindValue('backyard_tips', $this->backyard_tips );
-        
         $result = $stmt->execute();
         return $result;
+        } 
         
-    }     
-    
-    public function save() {
-        // A new record does not have an id yet
-        if ( isset ($this->id) ) {
-            return $this->update();
-        }   else    {
-            return $this->create();
-        }  
-    }
-
-    public function merge_attributes($args = []) {
-        foreach($args as $key => $value) {
-            if(property_exists($this, $key) && !is_null($value)) {
-                $this->$key = $value;
-            }
-        }
-    }
 
     public function attributes() {
         $attributes = [];
